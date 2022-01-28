@@ -1,28 +1,32 @@
 /**
- * login.js
+ * register.js
  */
 $("button#submit").click(function(){
-	doLogin();
+	doRegister();
 });
 $(document).keydown(function(e) {
 	if (e.keyCode == 13) {
-		doLogin();
+		doRegister();
 	}
 });
 
-function doLogin(){
-	var email = $("#loginForm #email").val();
-	var password = $("#loginForm #password").val();
-	//alert(email + "  "+password);
-	if(email=="" || password=="")
+function doRegister(){
+	var email = $("#signinForm #email").val();
+	var password = $("#signinForm #password").val();
+	var domain = $("#signinForm #personalDomain").val();
+	var userName = $("#signinForm #userName").val();
+	
+	if(email=="" || password=="" || domain=="" || userName=="")
 		return;
-
+	
 	$.ajax( {    
-	    url:'/home/users/login',// 跳转到 action    
+	    url:'/home/users/register',// 跳转到 action    
 	    data:JSON.stringify(
 	    {    
     		email : email,    
-            password : password
+            password : password,
+            personalDomain : domain,
+            userName : userName
 	    }),    
 	    type:'post',    
 	    cache:false,    
@@ -40,5 +44,6 @@ function doLogin(){
 	          alert("异常！");    
 	     }    
 	}); 
+	
 	
 }
