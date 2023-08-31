@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--mybatis的代码生成器相关配置-->
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 引入配置文件 -->
+    <properties resource="application.properties"/>
+
+    <!-- 一个数据库一个context,context的子元素必须按照它给出的顺序
+        property*,plugin*,commentGenerator?,jdbcConnection,javaTypeResolver?,
+        javaModelGenerator,sqlMapGenerator?,javaClientGenerator?,table+
+    -->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <!-- 这个插件给生成的Java模型对象增加了equals和hashCode方法 -->
+        <!--<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>-->
+
+        <!-- 注释 -->
+        <!--        <commentGenerator>-->
+        <!--            &lt;!&ndash; 是否不生成注释 &ndash;&gt;-->
+        <!--            <property name="suppressAllComments" value="true"/>-->
+        <!--            &lt;!&ndash; 不希望生成的注释中包含时间戳 &ndash;&gt;-->
+        <!--            &lt;!&ndash;<property name="suppressDate" value="true"/>&ndash;&gt;-->
+        <!--            &lt;!&ndash; 添加 db 表中字段的注释，只有suppressAllComments为false时才生效&ndash;&gt;-->
+        <!--            &lt;!&ndash;<property name="addRemarkComments" value="true"/>&ndash;&gt;-->
+        <!--        </commentGenerator>-->
+
+
+        <!-- jdbc连接 数据库链接地址账号密码-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/miaosha"
+                        userId="root"
+                        password="111">
+            <!--高版本的 mysql-connector-java 需要设置 nullCatalogMeansCurrent=true-->
+            <!--            /<property name="nullCatalogMeansCurrent" value="true"/>-->
+        </jdbcConnection>
+
+        <!-- 生成DataObject类地址 -->
+        <javaModelGenerator targetPackage="com.miaoshaproject.dataobject" targetProject="src/main/java">
+            <!-- 是否让 schema 作为包的后缀，默认为false -->
+            <!--<property name="enableSubPackages" value="false"/>-->
+            <!-- 是否针对string类型的字段在set方法中进行修剪，默认false -->
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <!-- 生成Mapper.xml文件 -->
+        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- 生成 XxxMapper.java 接口-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.miaoshaproject.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <!-- schema为数据库名，oracle需要配置，mysql不需要配置。
+             tableName为对应的数据库表名
+             domainObjectName 是要生成的实体类名(可以不指定，默认按帕斯卡命名法将表名转换成类名)
+             enableXXXByExample 默认为 true， 为 true 会生成一个对应Example帮助类，帮助你进行条件查询，不想要可以设为false
+             -->
+        <!--        <table tableName="user_info" domainObjectName="UserDO" enableCountByExample="false"-->
+        <!--        enableUpdateByExample="false" enableDeleteByExample="false"-->
+        <!--        enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+
+        <!--        <table tableName="user_password" domainObjectName="UserPasswordDO" enableCountByExample="false"-->
+        <!--               enableUpdateByExample="false" enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+
+        <table tableName="promo" domainObjectName="PromoDO" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"></table>
+
+
+    </context>
+</generatorConfiguration>
